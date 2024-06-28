@@ -28,15 +28,10 @@ class _LoginState extends State<Login> {
           padding: EdgeInsets.fromLTRB(w * 0.05, h * 0.1, w * 0.05, h * 0.03),
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 width: w * 0.55,
                 height: h * 0.2,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      opacity: 0.9,
-                      image: AssetImage("assets/images/smallUnesco.jpg"),
-                      fit: BoxFit.cover),
-                ),
+                child: const Icon(Icons.account_circle_outlined),
               ),
               const SizedBox(
                 height: 15.0,
@@ -59,7 +54,7 @@ class _LoginState extends State<Login> {
                         Text(
                           "Login",
                           style:
-                          TextStyle(color: Colors.blue.withOpacity(0.4), fontSize: w * 0.09),
+                          TextStyle(color: Colors.orange.withOpacity(0.4), fontSize: w * 0.09),
                         ),
                         const SizedBox(
                           height: 25,

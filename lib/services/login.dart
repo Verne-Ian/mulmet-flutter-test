@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:mulmet_flutter_test/interface/home.dart';
 
 final myCloudFire = FirebaseFirestore.instance;
 final myAuth = FirebaseAuth.instance;
@@ -37,7 +38,10 @@ emailLogin( TextEditingController emailControl, TextEditingController passContro
         });
     await myAuth.signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
-          // TODO: Add nav logic
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context)=> const MyHomePage(title: 'Home')), (Route<dynamic> route) => false);
     });
   } on FirebaseAuthException catch (e) {
     Navigator.pop(context);

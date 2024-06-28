@@ -23,7 +23,7 @@ TextFormField otherField(String text, IconData icon, bool isPassword,
     decoration: InputDecoration(
       prefixIcon: Icon(
         icon,
-        color: Colors.blueGrey,
+        color: Colors.orange.shade100,
       ),
       labelText: text,
       labelStyle: TextStyle(
@@ -33,7 +33,7 @@ TextFormField otherField(String text, IconData icon, bool isPassword,
           gapPadding: 1.0,
           borderRadius: BorderRadius.circular(20.0),
           borderSide: BorderSide(
-              color: Colors.blue.withOpacity(0.9),
+              color: Colors.orange.withOpacity(0.9),
               style: BorderStyle.solid,
               width: 3)),
       floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -45,7 +45,7 @@ TextFormField otherField(String text, IconData icon, bool isPassword,
           borderSide: BorderSide(
               width: 3,
               style: BorderStyle.solid,
-              color: Colors.blue.withOpacity(0.9))),
+              color: Colors.orange.withOpacity(0.9))),
     ),
     keyboardType:
     isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
@@ -68,9 +68,9 @@ Container loginSignUpButton(
       style: ButtonStyle(
           backgroundColor: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.pressed)) {
-              return Colors.blueGrey;
+              return Colors.orange;
             }
-            return Colors.blue.shade600;
+            return Colors.orange.shade600;
           }),
           shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)))),
