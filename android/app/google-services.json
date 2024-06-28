@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "510671234036",
+    "project_id": "mulmet-flutter-test",
+    "storage_bucket": "mulmet-flutter-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510671234036:android:da00899055b89c3178cfa1",
+        "android_client_info": {
+          "package_name": "com.ian_andrew.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfTHkEk43REhd3C8HH8xywLHPPymT7TxE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
