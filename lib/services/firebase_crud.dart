@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-final myCloudFire = FirebaseFirestore.instance;
+final myCloudFire = FirebaseFirestore.instance; // Cloud firestore instance
 
-
+// This function is for adding content to the database
 void addToDB(BuildContext context, TextEditingController textEditingController, {required String name, required String email, required String uid, required Function setState}) async {
   double w = MediaQuery.of(context).size.width;
   double h = MediaQuery.of(context).size.height;
@@ -29,6 +28,7 @@ void addToDB(BuildContext context, TextEditingController textEditingController, 
   }
 }
 
+// This function is used to delete content from the database
 void deleteRecord(BuildContext context, {required String userId}) async {
   try{
     await myCloudFire.collection('users').doc(userId).delete().then((result){
@@ -49,6 +49,7 @@ void deleteRecord(BuildContext context, {required String userId}) async {
   }
 }
 
+// This function will be used to update records in the database
 void updateRecord(BuildContext context, TextEditingController controller, {required String newName, required String userId, required Function setState}) async {
   await myCloudFire.collection('users').doc(userId).update({'User name': newName}).then((result){
     setState((){

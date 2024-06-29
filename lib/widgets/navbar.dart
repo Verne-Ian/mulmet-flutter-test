@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:mulmet_flutter_test/interface/word_game.dart';
 
 import '../interface/firebase_crud.dart';
 import '../interface/login.dart';
@@ -64,6 +65,15 @@ class NavBar extends StatelessWidget {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const FirebaseCrud(opType: 'delete')));
                     }
                 ),
+                ListTile(
+                    tileColor: Colors.orangeAccent.shade100,
+                    selectedTileColor: Colors.orangeAccent,
+                    title: const Text('Word Game'),
+                    leading: Icon(Icons.gamepad_outlined, color: Colors.blue.shade700,),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const WordGame()));
+                    }
+                )
               ],
             ),
           ),

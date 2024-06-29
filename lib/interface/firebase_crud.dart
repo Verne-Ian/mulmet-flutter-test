@@ -51,6 +51,7 @@ class _FirebaseCrudState extends State<FirebaseCrud> {
                                 uid: userId,setState: setState);
                           }
                         }, child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.save_outlined),
                         Text('Create User'),
@@ -105,6 +106,7 @@ class _FirebaseCrudState extends State<FirebaseCrud> {
               if(snap.connectionState == ConnectionState.none){
                 return const Center(
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('No internet')
                     ],
@@ -113,6 +115,7 @@ class _FirebaseCrudState extends State<FirebaseCrud> {
               }
               return const Center(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('No data found')
                   ],
@@ -170,6 +173,7 @@ class _FirebaseCrudState extends State<FirebaseCrud> {
               if(snap.connectionState == ConnectionState.none){
                 return const Center(
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('No internet')
                     ],
@@ -178,6 +182,7 @@ class _FirebaseCrudState extends State<FirebaseCrud> {
               }
               return const Center(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('No data found')
                   ],
@@ -262,6 +267,7 @@ class _FirebaseCrudState extends State<FirebaseCrud> {
               if(snap.connectionState == ConnectionState.none){
                 return const Center(
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('No internet')
                     ],
@@ -270,6 +276,7 @@ class _FirebaseCrudState extends State<FirebaseCrud> {
               }
               return const Center(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('No data found')
                   ],

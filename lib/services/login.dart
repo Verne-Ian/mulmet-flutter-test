@@ -3,8 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mulmet_flutter_test/interface/home.dart';
 
-final myAuth = FirebaseAuth.instance;
+final myAuth = FirebaseAuth.instance; // FirebaseAuth instance for all user account related issues.
 
+// This function will manage user login when called.
 emailLogin( TextEditingController emailControl, TextEditingController passControl,
     String email, String password, BuildContext context) async {
   try {
