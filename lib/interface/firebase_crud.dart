@@ -16,10 +16,14 @@ class FirebaseCrud extends StatefulWidget {
 
 class _FirebaseCrudState extends State<FirebaseCrud> {
   TextEditingController nameController = TextEditingController();
+  TextEditingController updateController = TextEditingController();
   final cloudDB = FirebaseFirestore.instance.collection('users');
   final userId = FirebaseAuth.instance.currentUser!.uid;
+  bool editing = false;
+
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
     if(widget.opType == 'create'){
       return Scaffold(
         appBar: AppBar(
@@ -78,10 +82,13 @@ class _FirebaseCrudState extends State<FirebaseCrud> {
                         final userName = userData['User name'];
                         final userEmail = userData['Email'];
                         return Center(
-                          child: ListTile(
-                            leading: const Icon(Icons.person, size: 40.0,),
-                            title: Text(userName),
-                            subtitle: Text(userEmail),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListTile(
+                              leading: const Icon(Icons.person, size: 40.0,),
+                              title: Text(userName),
+                              subtitle: Text(userEmail),
+                            ),
                           )
                         );
                       });
@@ -114,7 +121,7 @@ class _FirebaseCrudState extends State<FirebaseCrud> {
         }),
       );
     }
-    if(widget.opType == 'update'){
+    if(widget.opType == 'delete'){
       return Scaffold(
         appBar: AppBar(
           title: Text('Sample Firebase ${widget.opType}'),
@@ -135,14 +142,18 @@ class _FirebaseCrudState extends State<FirebaseCrud> {
                         final userName = userData['User name'];
                         final userEmail = userData['Email'];
                         return Center(
-                            child: ListTile(
-                              leading: const Icon(Icons.person, size: 40.0,),
-                              title: Text(userName),
-                              subtitle: Text(userEmail),
-                              trailing: IconButton(
-                                  onPressed: (){
-
-                                  }, icon: const Icon(Icons.delete_forever, color: Colors.red,)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ListTile(
+                                leading: const Icon(Icons.person, size: 40.0,),
+                                title: Text(userName),
+                                subtitle: Text(userEmail),
+                                trailing: IconButton(
+                                  tooltip: 'Delete Record',
+                                    onPressed: (){
+                                      deleteRecord(context, userId: userId);
+                                    }, icon: const Icon(Icons.delete_forever, color: Colors.red,)),
+                              ),
                             )
                         );
                       });
@@ -181,6 +192,90 @@ class _FirebaseCrudState extends State<FirebaseCrud> {
           centerTitle: true,
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
+        body: StreamBuilder(
+            stream: cloudDB.where('ID', isEqualTo: userId).snapshots(),
+            builder: (context, snap){
+              if(snap.hasData){
+                final newData = snap.data!.docs;
+                if(newData.isNotEmpty){
+
+                  return ListView.builder(
+                      itemCount: newData.length,
+                      itemBuilder: (context, index){
+                        final userData = newData[index].data();
+                        final userName = userData['User name'];
+                        final userEmail = userData['Email'];
+                        return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ListTile(
+                                    leading: const Icon(Icons.person, size: 40.0,),
+                                    title: Text(userName),
+                                    subtitle: Text(userEmail),
+                                    trailing: IconButton(
+                                        tooltip: 'Update Record',
+                                        onPressed: (){
+                                          setState(() {
+                                            editing = true;
+                                          });
+                                        }, icon: const Icon(Icons.update, color: Colors.red,)),
+                                  ),
+                                  editing ? defaultField('New name', Icons.person_add_alt_outlined, false, updateController, '') : const SizedBox(),
+                                  editing ? Container(
+                                    width: w * 0.4,
+                                    height: 60.0,
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(onPressed: (){
+                                      if(updateController.text.isNotEmpty){
+                                        updateRecord(context, updateController, newName: updateController.text, userId: userId, setState: setState);
+                                        setState(() {
+                                          editing = false;
+                                        });
+                                      }
+                                    }, child: const Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.save_outlined),
+                                        SizedBox(width: 8.0,),
+                                        Text('Save'),
+                                      ],
+                                    )),
+                                  ) : const SizedBox()
+                                ],
+                              ),
+                            )
+                        );
+                      });
+                }
+              }
+              if(snap.connectionState == ConnectionState.waiting){
+                return const Center(
+                  child: SpinKitFoldingCube(
+                    color: Colors.orangeAccent,
+                    size: 30.0,
+                  ),
+                );
+              }
+              if(snap.connectionState == ConnectionState.none){
+                return const Center(
+                  child: Row(
+                    children: [
+                      Text('No internet')
+                    ],
+                  ),
+                );
+              }
+              return const Center(
+                child: Row(
+                  children: [
+                    Text('No data found')
+                  ],
+                ),
+              );
+            }),
       );
     }
   }

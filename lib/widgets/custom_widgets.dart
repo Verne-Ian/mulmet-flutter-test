@@ -87,7 +87,7 @@ Container loginSignUpButton(
 ///for number or text fields.
 ///You can edit it's appearance as desired.
 TextFormField defaultField(String text, IconData icon, bool isDigit,
-    TextEditingController controller, String? unit) {
+    TextEditingController controller, String? init) {
   return TextFormField(
     controller: controller,
     obscureText: isDigit,
@@ -107,7 +107,6 @@ TextFormField defaultField(String text, IconData icon, bool isDigit,
         icon,
         color: Colors.orange.shade100,
       ),
-      suffixText: unit,
       suffixStyle: const TextStyle(
           color: Colors.white70,
           fontWeight: FontWeight.w600,
