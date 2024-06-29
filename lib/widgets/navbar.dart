@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mulmet_flutter_test/interface/firebase_crud.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+
+import '../interface/firebase_crud.dart';
+import '../interface/login.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
 
+  void _signOut(BuildContext context) {
+    FirebaseAuth.instance.signOut().then((_){
+      Navigator.pushAndRemoveUntil(
+          context, MaterialPageRoute(builder: (context)=>const Login()), (Route<dynamic> route) => false);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -40,7 +50,7 @@ class NavBar extends StatelessWidget {
                   tileColor: Colors.orangeAccent.shade100,
                   selectedTileColor: Colors.orangeAccent,
                   title: const Text('Firebase Update Sample'),
-                  leading: const Icon(Icons.update, color: Colors.yellow,),
+                  leading: const Icon(Icons.update, color: Colors.black,),
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const FirebaseCrud(opType: 'update')));
                     }
@@ -68,7 +78,9 @@ class NavBar extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(child: ElevatedButton(onPressed: (){}, child: const Text("Sign Out")))
+                  Expanded(child: ElevatedButton(onPressed: (){
+                    _signOut(context);
+                  }, child: const Text("Sign Out")))
                 ],
               ),
               const SizedBox(height: 10.0,),
@@ -76,7 +88,9 @@ class NavBar extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(child: ElevatedButton(onPressed: (){}, child: const Text("Exit App")))
+                  Expanded(child: ElevatedButton(onPressed: (){
+                    SystemNavigator.pop();
+                  }, child: const Text("Exit App")))
                 ],
               ),
             ],
