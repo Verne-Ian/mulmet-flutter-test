@@ -26,6 +26,7 @@ Once you click on the debug or run option of the IDE, the project will be built 
 The project only supports devices with android version 6 and above.
 
 #### A sample view of the interface on android.
+Please check Screenshots folder
 
 ### ON Web
 To run this project on web, you simply have to install google chrome or microsoft edge on your computer.
@@ -34,4 +35,4 @@ Once this is done, the IDE will automatically detect its presence and list it as
 On selecting run or debug in the IDE, the project will be launched in a new tab and you'll be able to view the app.
 
 #### A sample view of the interface on web.
-
+Please check screenshots folder
