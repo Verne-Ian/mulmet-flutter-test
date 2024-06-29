@@ -82,3 +82,58 @@ Container loginSignUpButton(
     ),
   );
 }
+
+///This can be used if you want custom but similar text fields throughout the app
+///for number or text fields.
+///You can edit it's appearance as desired.
+TextFormField defaultField(String text, IconData icon, bool isDigit,
+    TextEditingController controller, String? unit) {
+  return TextFormField(
+    controller: controller,
+    obscureText: isDigit,
+    enableSuggestions: isDigit,
+    autocorrect: isDigit,
+    cursorHeight: 20.0,
+    cursorColor: Colors.black54,
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter your $text';
+      }
+      return null;
+    },
+    style: TextStyle(color: Colors.black.withOpacity(0.9)),
+    decoration: InputDecoration(
+      prefixIcon: Icon(
+        icon,
+        color: Colors.orange.shade100,
+      ),
+      suffixText: unit,
+      suffixStyle: const TextStyle(
+          color: Colors.white70,
+          fontWeight: FontWeight.w600,
+          fontSize: 16.0,
+          height: 1.0),
+      labelText: text,
+      labelStyle: const TextStyle(
+          color: Colors.black54,
+          fontWeight: FontWeight.w600,
+          fontSize: 16.0,
+          height: 1.0),
+      filled: true,
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30.0),
+          borderSide: const BorderSide(color: Colors.orange, width: 3)),
+      floatingLabelBehavior: FloatingLabelBehavior.auto,
+      floatingLabelStyle:
+      const TextStyle(color: Colors.black54, fontWeight: FontWeight.w600),
+      fillColor: Colors.white.withOpacity(0.3),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          borderSide: BorderSide(
+              width: 3,
+              style: BorderStyle.solid,
+              color: Colors.orange.withOpacity(0.5))),
+    ),
+    keyboardType: isDigit ? TextInputType.number : TextInputType.text,
+  );
+}

@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
               SizedBox(
                 width: w * 0.55,
                 height: h * 0.2,
-                child: const Icon(Icons.account_circle_outlined),
+                child: Icon(Icons.account_circle_outlined, size: w * 0.08,),
               ),
               const SizedBox(
                 height: 15.0,
